@@ -17,6 +17,7 @@ import HomePage from "./pages/HomePage";
 import AdminDashboard from "./pages/AdminDashboard";
 import { useAuth } from "./context/AuthContext";
 import ProductsPage from "./pages/ProductsPage";
+import Chatbot from "./components/Chatbot";
 
 const ProtectedRoute = ({ children, adminOnly = false }) => {
   const { user, loading } = useAuth();
@@ -68,6 +69,7 @@ function App() {
         <Router>
           <div className="App">
             <AppRoutes />
+            <Chatbot />
             <ToastContainer
               position="top-right"
               autoClose={3000}

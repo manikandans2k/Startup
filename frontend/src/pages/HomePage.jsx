@@ -7,8 +7,12 @@ import ProductModal from "../components/ProductModal";
 import { productService, whatsappService } from "../services/api";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -55,6 +59,18 @@ const HomePage = () => {
   useEffect(() => {
     loadProducts();
   }, []);
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [location]);
 
   useEffect(() => {
     filterProducts();
@@ -341,14 +357,14 @@ const HomePage = () => {
 
       {/* WhatsApp Float */}
 
-      <a
+      {/* <a
         href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || "919025153037"}`}
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"
       >
         <i className="fab fa-whatsapp"></i>
-      </a>
+      </a> */}
 
       <ProductModal
         show={showProductModal}
